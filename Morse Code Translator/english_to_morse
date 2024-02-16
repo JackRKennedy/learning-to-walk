@@ -1,0 +1,117 @@
+morse_code_dict = {
+    # morse code dictionary, key:value pairs
+    "a": ".-",
+    "b": "-...",
+    "c": "-.-.",
+    "d": "-..",
+    "e": ".",
+    "f": "..-.",
+    "g": "--.",
+    "h": "....",
+    "i": "..",
+    "j": ".---",
+    "k": "-.-",
+    "l": ".-..",
+    "m": "--",
+    "n": "-.",
+    "o": "---",
+    "p": ".--.",
+    "q": "--.-",
+    "r": ".-.",
+    "s": "...",
+    "t": "-",
+    "u": "..-",
+    "v": "...-",
+    "w": ".--",
+    "x": "-..-",
+    "y": "-.--",
+    "z": "--..",
+    "1": ".----",
+    "2": "..---",
+    "3": "...--",
+    "4": "....-",
+    "5": ".....",
+    "6": "-....",
+    "7": "--...",
+    "8": "---..",
+    "9": "----.",
+    "0": "-----",
+    "!": "-.-.--",
+    ",": "--..--",
+    ".": ".-.-.-",
+    '"': ".-..-.",
+    "'": ".----.",
+    "?": "..--..",
+    "(": "-.--.",
+    ")": "-.--.-",
+    " ": " / ",  # forward slash between words
+}
+
+
+# create a function to translate a word to morse code
+def translate_to_morse():
+    to_translate = input("What would you like to translate?: ")
+    to_translate = to_translate.lower()
+
+    # set empty character and word strings
+    translated_morse = ""
+
+    # split the sentence into a list of words
+    split_sentence = to_translate.split(" ")
+
+    # iterate through the list of words
+    for word in split_sentence:
+        # iterate through the letters in each word
+        for character in word:
+            # for each letter in the input, look up the letter in the morse dict and assign the value to translated_morse
+            translated_morse += f"{morse_code_dict[character]} "
+
+        # add a space between each word after the loop iterates through the letters in each word
+        translated_morse += " / "
+
+    print(f'"{to_translate}" in morse code translates to: \n{translated_morse}')
+
+
+# create another function, this time to translate morse to english
+def translate_to_english():
+    english_text = ""
+    morse_code = input("Enter the Morse code: ")
+
+    morse_code_words = morse_code.split(" / ")
+
+    for word in morse_code_words:
+        symbols = word.split(" ")
+        for symbol in symbols:
+            for key, value in morse_code_dict.items():
+                if value == symbol:
+                    english_text += f"{key}"
+                    break  # Exit the inner loop once a match is found
+            else:
+                english_text += (
+                    " "  # Add a space if no match is found for the symbol
+                )
+
+    print(f"Translated text: {english_text}")
+
+
+# while loop to keep the program running until the user decides to quit
+
+programming_running = True
+
+while programming_running:
+    print("\n\nWelcome to the Morse Code Translator\n")
+    print("1. English to Morse Code")
+    print("2. Morse Code to English")
+    print("3. Quit")
+
+    user_choice = input("\nWhat would you like to do?: ")
+
+    if user_choice == "1":
+        translate_to_morse()
+    elif user_choice == "2":
+        translate_to_english()
+    elif user_choice == "3":
+        programming_running = False
+    else:
+        break
+print("Thank you for using the Morse Code Translator")
